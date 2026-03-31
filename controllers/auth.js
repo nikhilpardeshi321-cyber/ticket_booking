@@ -13,6 +13,7 @@ exports.signup = async (req, res) => {
         });
     }
 
+    // Check if email username is not only numbers
     const localPart = email.split("@")[0];
     if (/^\d+$/.test(localPart)) {
         return res.status(400).json({
