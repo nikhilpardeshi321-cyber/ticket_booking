@@ -1,10 +1,10 @@
 // controllers/eventController.js
-const Event = require("../models/event");
+const eventModel = require("../models/event");
 
 exports.createEvent = async (req, res) => {
     const { title, date, totalTickets } = req.body;
 
-    const event = await Event.create({
+    const event = await eventModel.create({
         title,
         date,
         totalTickets,
@@ -15,17 +15,17 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.getEvents = async (req, res) => {
-    const events = await Event.find({},"title");
+    const events = await eventModel.find({},"title");
     res.status(200).json({ status: true, data: events });
 };
 
 exports.getEvent = async (req, res) => {
-    const event = await Event.findById(req.params.id);
+    const event = await eventModel.findById(req.params.id);
     res.status(200).json({ status: true, data: event });
 };
 
 exports.updateEvent = async (req, res) => {
-    const event = await Event.findByIdAndUpdate(
+    const event = await eventModel.findByIdAndUpdate(
         req.params.id,
         req.body,
         { new: true }
@@ -34,6 +34,6 @@ exports.updateEvent = async (req, res) => {
 };
 
 exports.deleteEvent = async (req, res) => {
-    await Event.findByIdAndDelete(req.params.id);
+    await eventModel.findByIdAndDelete(req.params.id);
     res.status(200).json({ status: true, message: "Deleted successfully" });
 };
