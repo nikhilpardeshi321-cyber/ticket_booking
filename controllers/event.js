@@ -30,7 +30,7 @@ exports.updateEvent = async (req, res) => {
     }
     const event = await eventModel.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        { title: req.body.title, date: req.body.date, totalTickets: req.body.totalTickets },
         { new: true }
     );
     res.status(200).json({ status: true, data: event });
