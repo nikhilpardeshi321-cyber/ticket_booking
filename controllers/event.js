@@ -15,13 +15,13 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.getEvents = async (req, res) => {
-    const events = await eventModel.find({},"title");
-    res.status(200).json({ status: true, data: events });
+    const events = await eventModel.find({}, "title");
+    events ? res.status(200).json({ status: true, data: events }) : res.status(404).json({ status: false, message: "Events not found" });
 };
 
 exports.getEvent = async (req, res) => {
     const event = await eventModel.findById(req.params.id);
-    res.status(200).json({ status: true, data: event });
+    event ? res.status(200).json({ status: true, data: event }) : res.status(404).json({ status: false, message: "Event details not found" });
 };
 
 exports.updateEvent = async (req, res) => {
