@@ -22,7 +22,7 @@ exports.bookTicket = async (req, res) => {
         return res.status(400).json({ status: false, message: "Tickets sold out" });
     }
     await bookingModel.create({
-        userId: req.user.id,
+        userId: userId,
         eventId,
         tickets
     });

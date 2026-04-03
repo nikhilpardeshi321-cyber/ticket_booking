@@ -25,6 +25,9 @@ exports.getEvent = async (req, res) => {
 };
 
 exports.updateEvent = async (req, res) => {
+    if(!req.params.id){
+        return res.status(400).json({ status: false, message: "Event ID is required" });
+    }
     const event = await eventModel.findByIdAndUpdate(
         req.params.id,
         req.body,
@@ -34,6 +37,9 @@ exports.updateEvent = async (req, res) => {
 };
 
 exports.deleteEvent = async (req, res) => {
+    if(!req.params.id){
+        return res.status(400).json({ status: false, message: "Event ID is required" });
+    }
     await eventModel.findByIdAndDelete(req.params.id);
-    res.status(200).json({ status: true, message: "Deleted successfully" });
+    res.status(200).json({ status: true, message: "Event Deleted successfully" });
 };
